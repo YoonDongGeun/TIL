@@ -1,4 +1,4 @@
-# 리액트
+# 리액트 CDN 설치
 
 리액트 install 없이 CDN으로 설치
 
@@ -17,7 +17,6 @@ Vue와 맞찬가지로 DOM컨테이너를 설치해야한다. DOM컨테이너는
 **2단계**
 
 ```html
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -77,4 +76,10 @@ const root = ReactDOM.createRoot(domContainer);
 root.render(e(LikeButton));
 ```
 
+# 리액트 npm 시작
 
+```shell
+npx 이름 create-react-app 앱이름
+cd 앱이름
+npm start
+```
