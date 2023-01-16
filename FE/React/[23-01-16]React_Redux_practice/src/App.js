@@ -1,67 +1,62 @@
 import React from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { bindActionCreators } from 'redux';
-import { actionCreators } from "./state/index"
-// export default function App(){
-// return <div>헬로</div>
-// }
-
-
-function DataList({list}) {
-  const [Ls, setLs] = React.useState(list);
-  const handleUpdateList = () => {
-    console.log(Ls);
-    setLs([...Ls,{id: `item-${Ls.length + 1}`,
-    content: '새로운 학습 주제 추가하기'
-  }])
+import { createStore } from 'redux';
+// connect는 어려움 -> 재사용성 때문에 있음.
+import {Provider, useSelector, useDispatch, connect} from 'react-redux';
+//currentState 는 현재 State값
+function reducer(currentState, action){
+  // 현재 State값이 없으면 넣어주기.
+  if(currentState === undefined){
+    return {
+      number:1,
+    };
   }
 
-  return React.createElement(
-    'div',
-    {role:'group'},
-    React.createElement(
-      'button',
-      {type:'button', onClick: handleUpdateList},
-      '데이터 아이템 추가'
-    ),
-    React.createElement('ul',
-    {className : 'DataList'},
-    Ls.map((item) => React.createElement('li', {key: item.id}, item.content))
-    
-  )
-  )
+    //복제본 수정하여 불변성 유지.
+    const newState = {...currentState};
+    if (action.type == 'PLUS') {
+      newState.number++;
+    }
+    if (action.type == 'MINUS'){
+      newState.number--;
+    }
+    return newState
+
+}
+const store = createStore(reducer);
+console.log(store)
 
 
+function Box(props){
+  const dispatch = useDispatch()
+  // const Minus = () => {
+  //   dispatch({type: 'MINUS'})
+  // }
+  function Minus() {
+    dispatch({type:'MINUS'})
+  }
+  const number = useSelector((state) => state.number);
+  return(
+    <div>
+      <h1>박스입니다.</h1>
+      <h1>number : {number}</h1>
+      <button onClick={() => {
+        dispatch({type: 'PLUS'})
+        }}>1 올리기</button>
+      <button onClick={Minus}>1 내리기</button>
+    </div>
+  );
 }
 
 
+
+
+
+
 export default function App(){
-  const account = useSelector((state) => state.account)
-  const dispatch = useDispatch()
-
-  const {depositMoney, withdrawMoney} = bindActionCreators(actionCreators, dispatch)
-
-  return React.createElement(
-    React.Fragment,
-    null,
-    React.createElement(
-      'div',
-      { className: 'point'},
-      'React 라이브러리',
-      '활용하기',
-      ' ',
-      '하하하하하'
-    ),
-    React.createElement(DataList, {
-      list: [
-        {id: "item-1", content: 'React 학습하기'},
-        {id: "item-2", content: 'ReactDOM을 활용한 SSR'},
-        {id: "item-3", content: 'CSS 유틸리티 퍼스트 프레임워크 활용'}
-      ]
-    },
-    ),
-    <h1>{account}</h1>,
-    <button onClick={()=>depositMoney(1000)}>deposit </button>,
-    <button onClick={()=>withdrawMoney(1000)}>withdraw</button>
+  return (
+    <Provider store={store}>
+      <Box></Box>
+      <h1>헬로</h1>
+    </Provider>
   )
 }
