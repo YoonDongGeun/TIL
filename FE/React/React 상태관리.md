@@ -57,8 +57,8 @@ const Main = () => {
 
     return (
         <div>
-			<h1>안녕하세요. <span id="name">{myName}</span> 입니다.</h1>
-			<button onClick={changeName}>Change</button>
+            <h1>안녕하세요. <span id="name">{myName}</span> 입니다.</h1>
+            <button onClick={changeName}>Change</button>
         </div>
     );
 };
@@ -82,26 +82,26 @@ setState는 생략해도 가능(안쓰면)
 import React, { useState } from 'react';
 
 const Main = () => {
-	// let myName = "Hong"; // useState를 사용하여 변경
-	const [ myName, setMyName ] = useState("GodDaeHee") 
+    // let myName = "Hong"; // useState를 사용하여 변경
+    const [ myName, setMyName ] = useState("GodDaeHee") 
 
     function changeName() {
         /*
-		myName = myName === "Hong" ? "Hong" : "Hihi";
+        myName = myName === "Hong" ? "Hong" : "Hihi";
         console.log(myName);
         document.getElementById("name").indderText = myName;
-		*/
-		setMyName(myName === "Hong" ? "Hong" : "Hihi");
+        */
+        setMyName(myName === "Hong" ? "Hong" : "Hihi");
     }
 
     return (
         <div>
-			<h1>안녕하세요. {myName} 입니다.</h1>
-			{/* <button 
-				onClick={() => {
-					setMyName(myName === "Hong" ? "Hong" : "Hihi");
-				}}
-			>Change</button> */}
+            <h1>안녕하세요. {myName} 입니다.</h1>
+            {/* <button 
+                onClick={() => {
+                    setMyName(myName === "Hong" ? "Hong" : "Hihi");
+                }}
+            >Change</button> */}
             <button onClick={changeName}>Change</button>
         </div>
     );
@@ -188,5 +188,3 @@ const Main = () => {
 
 export default Main;
 ```
-
-
