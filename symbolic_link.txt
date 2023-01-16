@@ -1,0 +1,17 @@
+mklink /d "링크" "원본" 
+-상대경로, 디렉토리 잘 생성 ㄱ
+
+mklink /d "node_modules" "..\..\..\..\symbollink\node_modules"
+mklink /d "public" "..\..\..\..\symbollink\public"
+mklink "package.json" "..\..\..\..\symbollink\package.json"
+mklink "package-lock.json" "..\..\..\..\symbollink\package-lock.json"
+mklink "webpack.config.js" "..\..\..\..\symbollink\webpack.config.js"
+
+
+
+mklink ".\babel.config.js" "..\..\..\..\symbollink\babel.config.js"
+mklink /d "..\symbollink\src" ".\src"
+
+module
+npm i redux react-redux
+npm i react-router-dom
